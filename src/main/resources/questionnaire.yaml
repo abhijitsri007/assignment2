@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: Question Answer
+  description: 'To make sure our application is accessed by humans and not a by any computers or bot.'
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: abhijit.srivastava@marlabs.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Assignment2
+  url: http://swagger.io/terms/
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: questionAnswer
+    description: Add the numbers & send the response.
+paths:
+  /answer:
+    post:
+      tags:
+        - questionAnswer
+      summary: Send the sum of the numbers to the service 2 along with the original response body from 1 which had the question
+      operationId: postAnswer
+      requestBody:
+        description: Answer
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QAResponse"
+        required: true
+      responses:
+        200:
+          description: Answer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QAResponse"
+        400:
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+  /question:
+    get:
+      summary: Send a request to Service 1 and receives a response body with the question
+      operationId: getRandomQuestions
+      tags:
+        - questionAnswer
+      responses:
+        200:
+          description: Question
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QAResponse"
+        400:
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    QAResponse:
+      type: object
+      required:
+        - question
+      properties:
+        code:
+          type: string
+        question:
+          type: string
+        items:
+          $ref: '#/components/schemas/Numbers'
+        answer:
+          type: integer
+          format: int64
+    Numbers:
+      type: array
+      items:
+        type: integer
+        format: int64
+      example: [ 1, 2, 3 ]
