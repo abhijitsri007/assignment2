@@ -1,0 +1,14 @@
+{
+  "java11": "true",
+  "dateLibrary": "java11",
+  "useBeanValidation": "true",
+  "useTags": "true",
+  "generateApiTests": "true",
+  "generateApiDocumentation": "false",
+  "supportingFiles": "false",
+  "serializableModel": "true",
+  "basePackage": "com.ul",
+  "modelPackage": "com.ul.model",
+  "apiPackage": "com.ul.api",
+  "configPackage": "com.ul.config"
+}
